@@ -1,0 +1,18 @@
+; This is the local .nprmrc file, that overide the global one. 
+; The global one will be located in: <prefix>/npm/etc/npmrc  
+; Here "xxx" is the username as used for your Cygwin home directory $HOME
+
+cache=C:\cygwin64\home\xxx\.npm
+color=true
+depth=9999
+editor=notepad++.exe
+globalconfig=C:\mybin\nodejs\npm\etc\npmrc
+init-module=C:\cygwin64\home\xxx\.npm-init.js
+loglevel=info
+prefix=C:\mybin\nodejs
+shell=C:\cygwin64\bin\mintty.exe
+userconfig=C:\cygwin64\home\xxx\.npmrc
+globalignorefile=C:\mybin\nodejs\npm\etc\npmignore
+
+; python is not shown in default npmrc or .npmrc and only added from command line (as per instructions)
+python=/usr/bin/python
