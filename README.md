@@ -38,14 +38,14 @@ ln -s <prefix>/node.exe /bin/node
 ```sh
 setx PATH "C:\mybin\nodejs;%PATH%"
 ```
-6) Copy the correct [`.npmrc`]() file into your Cygwin `$HOME`:
+6) Copy the correct [`.npmrc`](https://github.com/emigenix/npm_on_cygwin/blob/master/npmrc_local.txt) file into your Cygwin `$HOME`:
 ```sh
 cp npmrc_local.txt $HOME/.npmrc 
 ```
 
 7) Patch the git.js for correct Cygwin behaviour.
 
-   a) Download the patched git: [patched_git.js]()
+   a) Download the patched git: [patched_git.js](https://github.com/emigenix/npm_on_cygwin/blob/master/patched_git.js)
 
    b) Replace `<prefix>/node_modules/npm/lib/utils/git.js` with the patched *git.js*: 
 
@@ -54,7 +54,7 @@ cd
 cp /cygdrive/c/mybin/nodejs/node_modules/npm/lib/utils/git.js original_git.js
 cp patched_git.js /cygdrive/c/mybin/nodejs/node_modules/npm/lib/utils/git.js
 ```
-   c) Alternatively, make an alias of "git" using the [gitt.sh]() Bash script:
+   c) Alternatively, make an alias of "git" using the [gitt.sh](https://github.com/emigenix/npm_on_cygwin/blob/master/gitt.sh) Bash script:
 ```sh
 # mv /bin/git.exe /bin/gitbin
 # cp gitt.sh /bin/git
@@ -113,5 +113,36 @@ Your modules look amazing. Keep up the great work.
 $ ncu -g
 All global packages are up-to-date :)
 ```
+
+For additional checks, try:
+
+```sh
+npm config get registry
+npm config list
+npm root -g
+npm config get userconfig
+npm config get globalconfig
+
+# See the global internal npmrc:
+cat /cygdrive/c/mybin/nodejs/node_modules/npm/npmrc
+```
+
+**NOTE!!** `pm config get userconfig` depend on what your current direcotry is:
+
+```sh
+$ pwd && npm config get userconfig
+/cygdrive/c/Users/xxx
+C:\Users\xxx\.npmrc
+
+$ pwd && npm config get userconfig
+/home/xxx
+npm info it worked if it ends with ok
+npm info using npm@3.10.6
+npm info using node@v6.4.0
+C:\cygwin64\home\xxx\.npmrc
+npm info ok
+```
+
+So to not break stuff, I guess you should avoid installing *npm* stuff, when not in your Cygwin `$HOME`.
 
 Hope this helps!
